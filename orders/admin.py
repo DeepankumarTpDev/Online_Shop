@@ -11,7 +11,7 @@ from django.http import HttpResponse
 
 def export_to_csv(modeladmin, request, queryset):
     opts = modeladmin.model._meta
-    content_disposition = 'attachment; filename={opts.verbose_name}.csv'
+    content_disposition = f'attachment; filename={opts.verbose_name}.csv'
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = content_disposition
     writer = csv.writer(response)
@@ -28,7 +28,6 @@ def export_to_csv(modeladmin, request, queryset):
             data_row.append(value)
         writer.writerow(data_row)
     return response
-
 export_to_csv.short_description = 'Export to CSV'
 
 from django.urls import reverse
@@ -38,9 +37,14 @@ def order_detail(obj):
     url = reverse('orders:admin_order_detail', args=[obj.id])
     return mark_safe(f'<a href="{url}">View</a>')
 
+def order_pdf(obj):
+    url = reverse('orders:admin_order_pdf', args=[obj.id])
+    return mark_safe(f'<a href="{url}">PDF</a>')
+order_pdf.short_description = 'Invoice'
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', order_detail, 'first_name', 'last_name', 'email',
+    list_display = ['id', order_detail, order_pdf, 'first_name', 'last_name', 'email',
                     'address', 'postal_code', 'city', 'paid','braintree_id', 
                     'created', 'updated',]
     list_filter = ['paid', 'created', 'updated',]
