@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,15 @@ EMAIL_HOST_USER = 'deepankumar6748@gmail.com'
 EMAIL_HOST_PASSWORD = '##########'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+BRAINTREE_MERCHANT_ID = 'xxx' # Merchant ID
+BRAINTREE_PUBLIC_KEY = 'xxxx' # Public Key
+BRAINTREE_PRIVATE_KEY = 'xxx' # Private key
+
+import braintree
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
