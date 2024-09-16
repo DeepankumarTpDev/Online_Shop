@@ -14,7 +14,7 @@ def order_create(request):
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
-                order.save()
+            order.save()
 
             for item in cart:
                 OrderItem.objects.create(order=order,

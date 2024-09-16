@@ -37,7 +37,7 @@
                 {% endfor %}
                 {% if order.coupon %}
                     <tr class="subtotal">
-                        <td class="num">Subtotal</td>
+                        <th class="num">Subtotal</th>
                         <td colspan="2"></td>
                         <td class="num">INR {{ order.get_subtotal|floatformat:2 }}</td>
                     </tr>
@@ -46,7 +46,7 @@
                             "{{ order.coupon }}" coupon
                             ({{ order.discount }}% off)
                         </td>
-                        <td colspan="4"></td>
+                        <td colspan="2"></td>
                         <td class="num neg">
                             - INR {{ order.get_discount_amount|floatformat:2 }}
                         </td>
