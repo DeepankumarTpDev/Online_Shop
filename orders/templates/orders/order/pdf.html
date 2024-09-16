@@ -35,9 +35,26 @@
                         <td class="num">INR {{ item.get_cost }}</td>
                     </tr>
                 {% endfor %}
+                {% if order.coupon %}
+                    <tr class="subtotal">
+                        <td class="num">Subtotal</td>
+                        <td colspan="2"></td>
+                        <td class="num">INR {{ order.get_subtotal|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            "{{ order.coupon }}" coupon
+                            ({{ order.discount }}% off)
+                        </td>
+                        <td colspan="4"></td>
+                        <td class="num neg">
+                            - INR {{ order.get_discount_amount|floatformat:2 }}
+                        </td>
+                    </tr>
+                {% endif %}
                 <tr class="total">
                     <td colspan="3">Total</td>
-                    <td class="num">INR {{ order.get_total_cost }}</td>
+                    <td class="num">INR {{ order.get_total_cost|floatformat:2 }}</td>
                 </tr>
             </tbody>
         </table>

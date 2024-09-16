@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
+    'coupons.apps.CouponsConfig',
 ]
 
 MIDDLEWARE = [
@@ -130,16 +134,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 CART_SESSION_ID = 'cart'
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'deepankumar6748@gmail.com'
-EMAIL_HOST_PASSWORD = 'xxxx'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-BRAINTREE_MERCHANT_ID = 'xxx' # Merchant ID
-BRAINTREE_PUBLIC_KEY = 'xxxx' # Public Key
-BRAINTREE_PRIVATE_KEY = 'xxxx' # Private key
+BRAINTREE_MERCHANT_ID = os.getenv('BRAINTREE_MERCHANT_ID')
+BRAINTREE_PUBLIC_KEY = os.getenv('BRAINTREE_PUBLIC_KEY')
+BRAINTREE_PRIVATE_KEY = os.getenv('BRAINTREE_PRIVATE_KEY')
+
 
 import braintree
 BRAINTREE_CONF = braintree.Configuration(
