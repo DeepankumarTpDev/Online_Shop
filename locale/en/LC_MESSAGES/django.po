@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 12:02+0000\n"
+"POT-Creation-Date: 2024-09-16 12:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,26 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
+#: myshop/urls.py:24
+msgid "admin/"
+msgstr ""
+
+#: myshop/urls.py:25
+msgid "cart/"
+msgstr ""
+
+#: myshop/urls.py:26
+msgid "orders/"
+msgstr ""
+
+#: myshop/urls.py:27
+msgid "payment/"
+msgstr ""
+
+#: myshop/urls.py:28
+msgid "coupons/"
+msgstr ""
+
 #: orders/models.py:13
 msgid "first name"
 msgstr ""
@@ -145,6 +165,22 @@ msgid ""
 "    <p>Your order has been successfully completed. Your order number is "
 "<strong>%(order_id)s</strong>.</p>\n"
 "  "
+msgstr ""
+
+#: orders/urls.py:9
+msgid "create/"
+msgstr ""
+
+#: payment/urls.py:8
+msgid "process/"
+msgstr ""
+
+#: payment/urls.py:9
+msgid "done/"
+msgstr ""
+
+#: payment/urls.py:10
+msgid "canceled/"
 msgstr ""
 
 #: shop/templates/shop/base.html:7 shop/templates/shop/base.html:12
