@@ -1,9 +1,11 @@
 from django.urls import reverse
 from django.shortcuts import render,redirect
-from .models import OrderItem
+from .models import OrderItem,Product
 from .forms import OrderCreateForm
 from cart.cart import Cart
 from .tasks import order_created
+from shop.recommender import Recommender
+
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
@@ -15,12 +17,17 @@ def order_create(request):
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
             order.save()
-
             for item in cart:
                 OrderItem.objects.create(order=order,
                                 product=item['product'],
                                 price=item['price'],
                                 quantity=item['quantity'])
+                
+            product_ids = cart.cart.keys()
+            products = Product.objects.filter(id__in=product_ids)
+            r = Recommender()
+            products_bought = r.products_bought(products)
+
             cart.clear()
             # launch asynchronous task
             order_created.delay(order.id)

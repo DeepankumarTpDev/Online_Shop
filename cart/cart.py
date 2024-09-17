@@ -14,8 +14,16 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
         # store current applied coupon
-        self.coupon_id = self.session.get('coupon_id')
-
+        # Initialize coupon_id to None
+        self.coupon_id = None
+        coupon_id = self.session.get('coupon_id')
+        if coupon_id:
+            try:
+                coupon = Coupon.objects.get(id=coupon_id)
+                self.coupon_id = coupon.id if coupon.active else None
+            except Coupon.DoesNotExist:
+                self.coupon_id = None
+              
     def __iter__(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
